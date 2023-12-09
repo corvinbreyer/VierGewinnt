@@ -35,7 +35,8 @@ public class VierGewinnt
         maxSpielerzahl = 2,
         aktuellerSpieler = 1,
         anzahlSteineFuerGewinn = 4;
-
+    
+    public static int[] aktuellerStein = new int[2];
     public static int[][] feld = new int[feldHoehe][feldBreite];
 
     public static void main(String[] args)
