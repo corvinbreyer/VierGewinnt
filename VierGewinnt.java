@@ -30,8 +30,8 @@
 public class VierGewinnt
 {
     public static int
-        feldHoehe = 4,
-        feldBreite = 4,
+        feldHoehe = 7,
+        feldBreite = 7,
         maxSpielerzahl = 2,
         aktuellerSpieler = 1,
         anzahlSteineFuerGewinn = 4;
