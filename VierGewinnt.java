@@ -2,7 +2,7 @@
 
 –––––––––––– GRUNDLAGEN
 - Zweidimensionales int-Feld für Spielfeld
-- Erste Dimension gibt Spalten an -> feld[4][0] ist oben rechts
+- Erste Dimension gibt Spalten an -> feld[4][0] ist unten links
 - Feld-Inhalt 0 bedeutet Feld leer
 
 
