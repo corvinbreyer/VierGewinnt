@@ -42,6 +42,67 @@ public class VierGewinnt
     public static void main(String[] args)
     {
         System.out.println("hi :)");
+
+//Spilerfeldeingabe Marius + Milena
+        import java.util.Scanner;
+
+public class EingabeSpieler {
+	private static final int feldBreite = 7; // Anpassen der Feldbreite nach Bedarf
+	private static final int feldHoehe = 6;  // Anpassen der Feldhöhe nach Bedarf
+	private static int[][] spielfeld = new int[feldHoehe][feldBreite];
+
+	// Funktion, um das Spielfeld zu initiieren (alle Felder mit 0 befüllen)
+	public static void initSpielfeld() {
+		for (int i = 0; i < feldHoehe; i++) {
+			for (int j = 0; j < feldBreite; j++) {
+				spielfeld[i][j] = 0;
+			}
+		}
+	}
+
+	// Funktion, um das Spielfeld auszugeben
+	public static void printSpielfeld() {
+		for (int i = 0; i < feldHoehe; i++) {
+			for (int j = 0; j < feldBreite; j++) {
+				System.out.print(spielfeld[i][j] + " ");
+			}
+			System.out.println(); // Neue Zeile für den nächsten Spielfeld-Row
+		}
+	}
+
+	// Funktion, um einen Spielerstein zu setzen (bis zur nächsten freien Position durchfallen lassen)
+	public static void setzeStein(int spieler, int spalte) {
+		for (int i = feldHoehe - 1; i >= 0; i--) {
+			if (spielfeld[i][spalte] == 0) {
+				spielfeld[i][spalte] = spieler;
+				break;
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		initSpielfeld();
+		printSpielfeld();
+
+		int currentPlayer = 1;
+
+		while (true) {
+			System.out.println("Spieler " + currentPlayer + ", wähle eine Spalte (0-" + (feldBreite - 1) + "): ");
+			int selectedColumn = scanner.nextInt();
+
+			if (selectedColumn < 0 || selectedColumn >= feldBreite) {
+				System.out.println("Ungültige Spalte. Bitte erneut eingeben.");
+				continue;
+			}
+
+			setzeStein(currentPlayer, selectedColumn);
+			printSpielfeld();
+
+			currentPlayer = (currentPlayer == 1) ? 2 : 1;
+		}
+	}
+}
         return;
     }
 }
