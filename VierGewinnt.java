@@ -45,3 +45,4 @@ public class VierGewinnt
         return;
     }
 }
+Corvin ist nett
