@@ -47,7 +47,7 @@ public class VierGewinnt
 	public static boolean gewinnDebug = false;
 	
 	public static int[]
-		aktuellerStein = {5,1},
+		aktuellerStein = {0,0},
 		siege = new int[maxSpielerzahl];
 	
 	public static int[][] feld = new int[feldHoehe][feldBreite];
