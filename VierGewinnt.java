@@ -36,21 +36,23 @@ import java.util.Scanner;
 public class VierGewinnt
 {
 	public static int
-	runde = 0,
-	feldHoehe = 6,
-	feldBreite = 7,
-	maxSpielerzahl = 2,
-	aktuellerSpieler = 0,
-	anzahlSteineFuerGewinn = 4;
+		runde = 0,
+		feldHoehe = 6,
+		feldBreite = 7,
+		maxSpielerzahl = 2,
+		aktuellerSpieler = 0,
+		anzahlSteineFuerGewinn = 4;
 
 	//gibt ausführliche Infos zur Gewinnprüfung aus
 	public static boolean gewinnDebug = false;
 	
 	public static int[]
-			aktuellerStein = {5,1},
-			siege = new int[maxSpielerzahl];
+		aktuellerStein = {5,1},
+		siege = new int[maxSpielerzahl];
+	
 	public static int[][] feld = new int[feldHoehe][feldBreite];
 
+	
 	//Marius, Milena, Corvin
 	public static void main(String[] args)
 	{
@@ -153,7 +155,7 @@ public class VierGewinnt
 	}
 
 	//Corvin, Eva
-	public static boolean zeilenPrüfen()
+	public static boolean zeilenPruefen()
 	{
 		//curPos beschreibt die Position des aktuell zu prüfenden Steins
 		int[] curPos = {aktuellerStein[0],aktuellerStein[1]};
@@ -225,7 +227,7 @@ public class VierGewinnt
 	//Corvin, Eva
 	/*Für ausführliche Erklärung, Kommentare in "boolean zeilenPrüfen()"
 	beachten oder in der Dokumentation nachlesen*/
-	public static boolean spaltenPrüfen()
+	public static boolean spaltenPruefen()
 	{
 		int[] curPos = {aktuellerStein[0],aktuellerStein[1]};
 		// ––––– SPALTEN PRÜFEN –––––
@@ -375,7 +377,7 @@ public class VierGewinnt
 	public static boolean gewinnPruefen()
 	{
 		//falls einer der Proben true, also ein Gewinn, liefert
-		if (zeilenPrüfen() || spaltenPrüfen() || diagonalenRechtsPruefen() || diagonalenLinksPruefen())
+		if (zeilenPruefen() || spaltenPruefen() || diagonalenRechtsPruefen() || diagonalenLinksPruefen())
 		{
 			//Anzahl Siege des aktuellen Spielers erhöhen
 			//aktuellerSpieler muss um 1 verringert werden, da erster Spieler Wert 1 hat
