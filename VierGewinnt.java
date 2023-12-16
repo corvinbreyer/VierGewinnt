@@ -37,7 +37,7 @@ public class VierGewinnt
 {
 	public static int
 		runde = 0,
-		feldHoehe = 6,
+		feldHoehe = 7,
 		feldBreite = 7,
 		maxSpielerzahl = 2,
 		aktuellerSpieler = 0,
@@ -62,7 +62,6 @@ public class VierGewinnt
 		for (int i = 0; i < anzahlSteineFuerGewinn; i++) striche += "–";
 		System.out.println("\n" + striche + " " + anzahlSteineFuerGewinn + " GEWINNT! " + striche + "\n–– Runde " + runde + " ––\n");
 		
-		
 		initfeld(); //beschreibt Spielfeld mit 0 und gibt Spielfeld aus
 
 		do {
@@ -76,7 +75,7 @@ public class VierGewinnt
 	}
 
 	//Marius, Milena
-	// Funktion, um das Spielfeld zu initiieren (alle Felder mit 0 befüllen)
+	//Funktion, um das Spielfeld zu initiieren (alle Felder mit 0 befüllen)
 	public static void initfeld() {
 		for (int i = 0; i < feldHoehe; i++) {
 			for (int j = 0; j < feldBreite; j++) {
@@ -88,13 +87,13 @@ public class VierGewinnt
 	}
 
 	//Marius, Milena
-	// Funktion, um das Spielfeld auszugeben
+	//Funktion, um das Spielfeld auszugeben
 	public static void printfeld() {
 		for (int i = 0; i < feldHoehe; i++) {
 			for (int j = 0; j < feldBreite; j++) {
 				System.out.print(feld[i][j] + " ");
 			}
-			System.out.println(); // Neue Zeile für den nächsten Spielfeld-Row
+			System.out.println(); //Neue Zeile für den nächsten Spielfeld-Row
 		}
 		return;
 	}
@@ -131,7 +130,7 @@ public class VierGewinnt
 	}
 
 	//Marius, Milena
-	// Funktion, um einen Spielerstein zu setzen (bis zur nächsten freien Position durchfallen lassen)
+	//Funktion, um einen Spielerstein zu setzen (bis zur nächsten freien Position durchfallen lassen)
 	public static void setzeStein()
 	{
 		for (int i = feldHoehe - 1; i >= 0; i--)
@@ -230,7 +229,7 @@ public class VierGewinnt
 	public static boolean spaltenPruefen()
 	{
 		int[] curPos = {aktuellerStein[0],aktuellerStein[1]};
-		// ––––– SPALTEN PRÜFEN –––––
+		//––––– SPALTEN PRÜFEN –––––
 		if (gewinnDebug) System.out.println("\n––––– Spalten");
 		//4 mal mit i
 		for (int i = 0; i < anzahlSteineFuerGewinn; i++)
@@ -277,7 +276,7 @@ public class VierGewinnt
 	public static boolean diagonalenRechtsPruefen()
 	{
 		int curPos = 0;
-		// ––––– DIAGONALEN PRÜFEN (\) –––––
+		//––––– DIAGONALEN PRÜFEN (\) –––––
 		if (gewinnDebug) System.out.println("\n––––– Diagonalen rechts");
 		//4 mal mit i
 		for (int i = 0; i < anzahlSteineFuerGewinn; i++)
@@ -323,9 +322,9 @@ public class VierGewinnt
 	public static boolean diagonalenLinksPruefen()
 	{
 		int[] curPos = {0,0};
-		// ––––– DIAGONALEN PRÜFEN (/) –––––
+		//––––– DIAGONALEN PRÜFEN (/) –––––
 		if (gewinnDebug) System.out.println("\n––––– Diagonalen links");
-		// 4 times with i
+		//4 times with i
 		for (int i = 0; i < anzahlSteineFuerGewinn; i++)
 		{
 			if (aktuellerStein[1] - i < 0)
@@ -334,14 +333,14 @@ public class VierGewinnt
 				break;
 			}
 
-			// 4 times with j
+			//4 times with j
 			for (int j = 0; j < anzahlSteineFuerGewinn; j++)
 			{
-				// curPos: stein.x - (i: Offset Block) + (j: Anzahl Steine in Reihe)
+				//curPos: stein.x - (i: Offset Block) + (j: Anzahl Steine in Reihe)
 				curPos[0] = aktuellerStein[0] + i - j;
 				curPos[1] = aktuellerStein[1] - i + j;
 
-				// If curPos is greater than or equal to feldBreite, break
+				//If curPos is greater than or equal to feldBreite, break
 				if (curPos[1] >= feldBreite || aktuellerStein[0] + i >= feldHoehe)
 				{
 					if (gewinnDebug) System.out.print(" ## [array outofbounds]");
@@ -354,14 +353,14 @@ public class VierGewinnt
 
 				if (gewinnDebug) System.out.print(feld[curPos[0]][curPos[1]]);
 
-				// If the value is not the current player, break
+				//If the value is not the current player, break
 				if (feld[curPos[0]][curPos[1]] != aktuellerSpieler)
 				{
 					if (gewinnDebug) System.out.print(" [wrong value]");
 					break;
 				}
 
-				// If a full diagonal line is found without breaking, print win message and return
+				//If a full diagonal line is found without breaking, print win message and return
 				if (j >= anzahlSteineFuerGewinn - 1)
 				{
 					if (gewinnDebug) System.out.print(" [win diagL] (skipped " + ((anzahlSteineFuerGewinn - 1) - i) + " iterations)\n");
