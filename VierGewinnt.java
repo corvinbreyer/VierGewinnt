@@ -164,9 +164,9 @@ public class VierGewinnt
 		wir den Anfang der Probe immer um 1 in die entgegengesetzte Richtung, um
 		den aktuell gesetzten Stein in jeder möglichen Position einen potentiellen
 		Gewinns zu sehen. Veranschaulichung (Beispiel für Probe auf Zeilen):
-					(X] [ ] [ ] [ )
-				( ] [X] [ ] [ )
-			( ] [ ] [X] [ )
+		            (X] [ ] [ ] [ )
+		        ( ] [X] [ ] [ )
+		    ( ] [ ] [X] [ )
 		( ] [ ] [ ] [X)
 		Jede Zeile gibt eine separate Probe an. Alle in der jewiligen Zeile gezeigten
 		Felder werden geprüft. Die, hier 4, Felder pro Zeile werden nachfolgend als
