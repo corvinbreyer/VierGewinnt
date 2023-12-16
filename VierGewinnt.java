@@ -43,7 +43,9 @@ public class VierGewinnt
 	aktuellerSpieler = 0,
 	anzahlSteineFuerGewinn = 4;
 
+	//gibt ausführliche Infos zur Gewinnprüfung aus
 	public static boolean gewinnDebug = false;
+	
 	public static int[]
 			aktuellerStein = {5,1},
 			siege = new int[maxSpielerzahl];
@@ -64,7 +66,7 @@ public class VierGewinnt
 		do {
 			spielerWechseln(); //wechselt Spieler
 			zugAnfragen(); //setzt Stein und gibt Feld aus
-		} while (!gewinnPruefen());
+		} while (!gewinnPruefen()); //solange gewinnPruefen false zurückgibt
 		
 		System.out.println("\n\n");
 		main(args);
@@ -96,6 +98,7 @@ public class VierGewinnt
 	}
 
 	//Marius, Milena
+	//Fragz Spalte an, prüft diese und setzt neuen Stein mit setzeStein()
 	public static void zugAnfragen()
 	{
 		Scanner scanner = new Scanner(System.in);
@@ -142,7 +145,9 @@ public class VierGewinnt
 	}
 
 	//Corvin
+	//Funktion, um aktuellen Spieler zu wechseln
 	public static void spielerWechseln() {
+		//falls spieler >= maxAnzahl dann setze aktuellerSpieler auf 1, ansonsten zähle eins hoch
 		aktuellerSpieler = (aktuellerSpieler >= maxSpielerzahl) ? 1 : aktuellerSpieler + 1;
 		return;
 	}
@@ -150,48 +155,76 @@ public class VierGewinnt
 	//Corvin, Eva
 	public static boolean zeilenPrüfen()
 	{
+		//curPos beschreibt die Position des aktuell zu prüfenden Steins
 		int[] curPos = {aktuellerStein[0],aktuellerStein[1]};
 		if (gewinnDebug) System.out.println("\n––––– Zeilen");
-		//4 mal mit i
+		
+		/* Für Gewinnprobe starten wir beim zuletzt gesetzten Stein und prüfen
+		die in der bestimmten Richtung darauffolgenden Steine. Dann verschieben
+		wir den Anfang der Probe immer um 1 in die entgegengesetzte Richtung, um
+		den aktuell gesetzten Stein in jeder möglichen Position einen potentiellen
+		Gewinns zu sehen. Veranschaulichung (Beispiel für Probe auf Zeilen):
+					(X] [ ] [ ] [ )
+				( ] [X] [ ] [ )
+			( ] [ ] [X] [ )
+		( ] [ ] [ ] [X)
+		Jede Zeile gibt eine separate Probe an. Alle in der jewiligen Zeile gezeigten
+		Felder werden geprüft. Die, hier 4, Felder pro Zeile werden nachfolgend als
+		"Block" beschrieben, die Verschiebung des zu erst geprüften Feldes, hier mit
+		einer öffnender runden Klammer gekennzeichnet, wird als "Offset" beschrieben.*/
+		
+		//i gibt hier den Offset der Blöcke an
 		for (int i = 0; i < anzahlSteineFuerGewinn; i++)
 		{
-			//falls (stein.x +i) kleiner feldgröße/array
+			//falls ((Abstand des aktuellerStein zu linkem Rand)-Offset(=i)) kleiner 0
 			if (aktuellerStein[1]-i < 0)
 			{
+				//break, da nun in keinem Fall ein Gewinn erzielt werden kann
 				if (gewinnDebug) System.out.println("### [index < 0]");
 				break;
 			}
-			//4 mal mit j
+			//j steht für die einzelnen Felder pro Block (sogesehen Offset im Block)
 			for (int j = 0; j < anzahlSteineFuerGewinn; j++)
 			{
 				//curpos: stein.x - (i:Offset Block)+(j:Anzahl Steine in Reihe)
+				//curPos ("currentPosition") berechnet die eigentliche nächste Stein-Position
 				curPos[1] = aktuellerStein[1]-i+j;
 				//falls curPos größer feldgröße/array
 				if (curPos[1] >= feldBreite)
 				{
+					//break, da nun in keinem Fall ein Gewinn erzielt werden kann
 					if (gewinnDebug) System.out.print(" ## [array outofbounds]");
 					break;
 				}
 				if (gewinnDebug) System.out.print(feld[curPos[0]][curPos[1]]);
-				//wenn value combo break
+				//falls Feldinhalt nicht aktivem Spielerwert entspricht
 				if (feld[curPos[0]][curPos[1]] != aktuellerSpieler)
 				{
+					/*break, da nun in keinem Fall ein Gewinn erzielt werden
+					kann, da mind. ein Wert in der Reihe nicht stimmt*/
 					if (gewinnDebug) System.out.print(" [wrong value]");
 					break;
 				}
-				//wenn volle reihe ohne combo break
+				/*Falls Schleife in letzer Iteration angekommen ist und falls Schleife
+				in vorangegangener if-Abfrage nicht schon frühzeitig beendet wurde*/
 				if (j >= anzahlSteineFuerGewinn-1)
 				{
+					/*alle der zu prüfenden Felder beinhaltet den korrekten
+					Spielerwert, damit hat der aktuelle Spieler gewonnen*/
 					if (gewinnDebug) System.out.print(" [win Zeil] (skipped "+((anzahlSteineFuerGewinn-1)-i)+" iteration)\n");
 					return true;
 				}
 			}
+			//optischer Abstand, falls gewinnDebug == true ist
 			if (gewinnDebug) System.out.println();
 		}
+		//falls kein Gewinn erzielt wurde, gebe false zurück
 		return false;
 	}
 
 	//Corvin, Eva
+	/*Für ausführliche Erklärung, Kommentare in "boolean zeilenPrüfen()"
+	beachten oder in der Dokumentation nachlesen*/
 	public static boolean spaltenPrüfen()
 	{
 		int[] curPos = {aktuellerStein[0],aktuellerStein[1]};
@@ -200,7 +233,7 @@ public class VierGewinnt
 		//4 mal mit i
 		for (int i = 0; i < anzahlSteineFuerGewinn; i++)
 		{
-			//falls (stein.x +i) kleiner feldgröße/array
+			//falls (stein.y +i) kleiner feldgröße/array
 			if (aktuellerStein[0]-i < 0)
 			{
 				if (gewinnDebug) System.out.println("### [index < 0]");
@@ -237,6 +270,8 @@ public class VierGewinnt
 	}
 
 	//Corvin, Eva
+	/*Für ausführliche Erklärung, Kommentare in "boolean zeilenPrüfen()"
+	beachten oder in der Dokumentation nachlesen*/
 	public static boolean diagonalenRechtsPruefen()
 	{
 		int curPos = 0;
@@ -245,7 +280,6 @@ public class VierGewinnt
 		//4 mal mit i
 		for (int i = 0; i < anzahlSteineFuerGewinn; i++)
 		{
-			//falls (stein.x +i) kleiner feldgröße/array
 			if (aktuellerStein[0]-i < 0 || aktuellerStein[1]-i < 0)
 			{
 				if (gewinnDebug) System.out.println("### [index < 0]");
@@ -282,6 +316,8 @@ public class VierGewinnt
 	}
 
 	//Corvin, Eva
+	/*Für ausführliche Erklärung, Kommentare in "boolean zeilenPrüfen()"
+	beachten oder in der Dokumentation nachlesen*/
 	public static boolean diagonalenLinksPruefen()
 	{
 		int[] curPos = {0,0};
@@ -290,7 +326,6 @@ public class VierGewinnt
 		// 4 times with i
 		for (int i = 0; i < anzahlSteineFuerGewinn; i++)
 		{
-			// If (stein.x - i) is less than 0 or (stein.y + i) is greater than or equal to feldHoehe, break
 			if (aktuellerStein[1] - i < 0)
 			{
 				if (gewinnDebug) System.out.println("### [index < 0]");
@@ -339,8 +374,11 @@ public class VierGewinnt
 	//Corvin, Eva
 	public static boolean gewinnPruefen()
 	{
+		//falls einer der Proben true, also ein Gewinn, liefert
 		if (zeilenPrüfen() || spaltenPrüfen() || diagonalenRechtsPruefen() || diagonalenLinksPruefen())
 		{
+			//Anzahl Siege des aktuellen Spielers erhöhen
+			//aktuellerSpieler muss um 1 verringert werden, da erster Spieler Wert 1 hat
 			siege[aktuellerSpieler-1] += 1;
 			System.out.println("\nSpieler " + aktuellerSpieler + " hat gewonnen! ("+siege[aktuellerSpieler-1]+" Siege)");
 			return true;
