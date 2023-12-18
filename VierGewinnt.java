@@ -384,6 +384,23 @@ public class VierGewinnt
 			System.out.println("\nSpieler " + aktuellerSpieler + " hat gewonnen! ("+siege[aktuellerSpieler-1]+" Siege)");
 			return true;
 		}
+		//prüft (falls kein Gewinn/Sieg), ob Feld voll ist
+		else
+		{
+			boolean feldVoll = true;
+			for (int i = 0; i < feldBreite; i++)
+			{
+				//falls ein Feld in oberster Reihe leer (=0), dann feld noch nicht voll
+				if (feld[0][i] == 0) feldVoll = false;
+			}
+			if (feldVoll)
+			{
+				System.out.println("\nUnentschieden!");
+				/* in "gewinnPruefen()" bei Unentschieden true zurückgeben ist
+    				zwar nur semi-intuitiv aber es erfüllt den Zweck allemal ;D */
+				return true;
+			}
+		}
 		return false;
 	}
 }
