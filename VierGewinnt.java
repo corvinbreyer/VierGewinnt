@@ -76,9 +76,12 @@ public class VierGewinnt
 
 	//Marius, Milena
 	//Funktion, um das Spielfeld zu initiieren (alle Felder mit 0 befüllen)
-	public static void initfeld() {
-		for (int i = 0; i < feldHoehe; i++) {
-			for (int j = 0; j < feldBreite; j++) {
+	public static void initfeld()
+	{
+		for (int i = 0; i < feldHoehe; i++)
+		{
+			for (int j = 0; j < feldBreite; j++)
+			{
 				feld[i][j] = 0;
 			}
 		}
@@ -88,9 +91,12 @@ public class VierGewinnt
 
 	//Marius, Milena
 	//Funktion, um das Spielfeld auszugeben
-	public static void printfeld() {
-		for (int i = 0; i < feldHoehe; i++) {
-			for (int j = 0; j < feldBreite; j++) {
+	public static void printfeld()
+	{
+		for (int i = 0; i < feldHoehe; i++)
+		{
+			for (int j = 0; j < feldBreite; j++)
+			{
 				System.out.print(feld[i][j] + " ");
 			}
 			System.out.println(); //Neue Zeile für den nächsten Spielfeld-Row
@@ -105,7 +111,8 @@ public class VierGewinnt
 		Scanner scanner = new Scanner(System.in);
 		int selectedColumn = 0;
 
-		while (true) {
+		while (true)
+		{
 			System.out.print("\n–––\nSpieler " + aktuellerSpieler + ", wähle eine Spalte (1 - " + feldBreite + "): ");
 			selectedColumn = scanner.nextInt()-1;
 
@@ -147,7 +154,8 @@ public class VierGewinnt
 
 	//Corvin
 	//Funktion, um aktuellen Spieler zu wechseln
-	public static void spielerWechseln() {
+	public static void spielerWechseln()
+	{
 		//falls spieler >= maxAnzahl dann setze aktuellerSpieler auf 1, ansonsten zähle eins hoch
 		aktuellerSpieler = (aktuellerSpieler >= maxSpielerzahl) ? 1 : aktuellerSpieler + 1;
 		return;
@@ -347,7 +355,10 @@ public class VierGewinnt
 					break;
 				}
 				
-				if (curPos[0] < 0) {
+				if (curPos[0] < 0)
+				{
+					//kann, ohne gewinnDebug-Printvariable, mit voheriger break/Abfrage zusammengefasst werden
+					if (gewinnDebug) System.out.println("### [index < 0]");
 					break;
 				}
 
@@ -356,6 +367,7 @@ public class VierGewinnt
 				//If the value is not the current player, break
 				if (feld[curPos[0]][curPos[1]] != aktuellerSpieler)
 				{
+					//kann, ohne gewinnDebug-Printvariable, mit voheriger break/Abfrage zusammengefasst werden
 					if (gewinnDebug) System.out.print(" [wrong value]");
 					break;
 				}
@@ -390,7 +402,7 @@ public class VierGewinnt
 			boolean feldVoll = true;
 			for (int i = 0; i < feldBreite; i++)
 			{
-				//falls ein Feld in oberster Reihe leer (=0), dann feld noch nicht voll
+				//falls eine Zelle in oberster Reihe leer (=0), dann spielfeld noch nicht voll
 				if (feld[0][i] == 0) feldVoll = false;
 			}
 			if (feldVoll)
