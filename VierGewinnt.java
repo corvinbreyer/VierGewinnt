@@ -1,6 +1,6 @@
 /*
 ––––––––––––––––––––––– PROJEKTARBEIT JAVA
-––––––––– Ausarbeitung von MOS-WON23B: Corvin, Eva, Marius, Milena
+––––––––– Ausarbeitung von MOS-WON23B: Corvin Breyer, Eva Lindner, Marius Wagner, Milena Köllreutter
 ––––––––– Fertiggestellt am 15.12.2023
 –––––––––––––––––––––––
 
